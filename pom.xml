@@ -12,6 +12,7 @@
         <module>product-service</module>
         <module>inventory-service</module>
         <module>sharedClient</module>
+        <module>apiGateWay</module>
     </modules>
 
     <properties>
