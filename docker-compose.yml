@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+    product-service:
+      container_name: product-service
+      build: ./product-service
+      ports:
+        - "8080:8080"
+      networks:
+        - dj-net
+      depends_on:
+        - postgres-db
+        - eureka
+    inventory-service:
+      container_name: inventory-serivce
+      build: ./inventory-service
+      ports:
+        - "8081:8081"
+      networks:
+        - dj-net
+      depends_on:
+        - mysql-db
+        - eureka
+    eureka:
+      container_name: eureka
+      build: ./eureka
+      ports:
+        - "8761:8761"
+      networks:
+       - dj-net
+    apiGateWay:
+      container_name: apiGateWay
+      build: ./apiGateWay
+      ports:
+        - "8082:8082"
+      networks:
+        - dj-net
+networks:
+  dj-net:
+    name: "dj-net"
+    driver: bridge
+
