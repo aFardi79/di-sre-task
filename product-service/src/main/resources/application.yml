@@ -7,3 +7,48 @@ spring:
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  cloud:
+    openfeign:
+      client:
+        config:
+          inventory-service:
+            connect-timeout: 2000   # 2 sec
+            read-timeout: 3000      # 3 sec
+            logger-level: full
+  application:
+    name: product-service
+
+#resilience4j:
+#  circuitbreaker:
+#    instances:
+#      inventoryCB:
+#        slidingWindowSize: 10
+#        failureRateThreshold: 50
+#        waitDurationInOpenState: 10s
+#        permittedNumberOfCallsInHalfOpenState: 3
+#
+#  timelimiter:
+#    instances:
+#      inventoryTL:
+#        timeoutDuration: 2s
+#
+#  bulkhead:
+#    instances:
+#      inventoryBH:
+#        maxConcurrentCalls: 10
+#        maxWaitDuration: 0
+#
+#  retry:
+#    instances:
+#      inventoryRetry:
+#        maxAttempts: 2
+#        waitDuration: 500ms
+
+eureka:
+  client:
+    server-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 20
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true

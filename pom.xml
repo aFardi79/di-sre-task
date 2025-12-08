@@ -13,6 +13,7 @@
         <module>inventory-service</module>
         <module>sharedClient</module>
         <module>apiGateWay</module>
+        <module>eureka</module>
     </modules>
 
     <properties>
