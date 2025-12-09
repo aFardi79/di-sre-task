@@ -2,11 +2,17 @@ server:
   port: 8081
 
 spring:
+  datasource:
+    username: root
+    password: FT_amir13456679
+    url: jdbc:mysql://localhost:3306/dotinMikro
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create
   application:
     name: inventory-service
 eureka:
