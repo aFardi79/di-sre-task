@@ -1,6 +1,7 @@
 package ir.cactus.controller;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import ir.cactus.controller.contract.ProductApiContract;
 import ir.cactus.domain.dto.ProductRequestDTO;
 import ir.cactus.inventory.dto.InventoryServiceResponse;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
+@Tag(name = "ProductService")
 public class ProductController implements ProductApiContract {
 
 

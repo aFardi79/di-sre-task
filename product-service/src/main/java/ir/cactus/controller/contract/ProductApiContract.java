@@ -1,5 +1,6 @@
 package ir.cactus.controller.contract;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.cactus.domain.dto.ProductRequestDTO;
 import ir.cactus.inventory.dto.InventoryServiceResponse;
 import jakarta.validation.Valid;
@@ -12,13 +13,18 @@ public interface ProductApiContract {
 
 
 
+
+
+    @Operation(summary = "create Product Function")
     @PostMapping(value = "/create")
      String createProduct(@Valid @RequestBody ProductRequestDTO productRequestDTO);
 
-
+    @Operation(summary = "get Product Function")
     @GetMapping("/{id}")
     ProductRequestDTO getProductFromId(@PathVariable("id") Long id);
 
+
+    @Operation(summary = "get Product stock")
     @GetMapping("/{id}/availability")
     InventoryServiceResponse getInventoryStockFromProductId(@PathVariable("id") Long id);
 
