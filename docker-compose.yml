@@ -11,6 +11,8 @@ services:
       depends_on:
         - postgres-db
         - eureka
+      environment:
+        - SPRING_PROFILES_ACTIVE=docker
     inventory-service:
       container_name: inventory-serivce
       build: ./inventory-service
@@ -21,6 +23,8 @@ services:
       depends_on:
         - mysql-db
         - eureka
+      environment:
+        - SPRING_PROFILES_ACTIVE=docker
     eureka:
       container_name: eureka
       build: ./eureka
@@ -33,6 +37,30 @@ services:
       build: ./apiGateWay
       ports:
         - "8082:8082"
+      networks:
+        - dj-net
+    postgres-db:
+      image: postgres:latest
+      container_name: postgres-container
+      environment:
+        POSTGRES_DB: product
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      ports:
+        - "5432:5432"
+      volumes:
+        - postgres-data:/var/lib/postgresql/data
+      networks:
+        - dj-net
+    mysql-db:
+      image: mysql:latest
+      container_name: mysql-db
+      environment:
+        MYSQL_DATABASE: inventory
+        MYSQL_ROOT_PASSWORD: salam
+        MYSQL_PASSWORD: salam
+      ports:
+        - "3306:3306"
       networks:
         - dj-net
 networks:

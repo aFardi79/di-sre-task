@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @CircuitBreaker(name = "inventoryCB", fallbackMethod = "inventoryFallback")
+    @CircuitBreaker(name = "inventoryCB", fallbackMethod = "inventoryFallbacks")
     @TimeLimiter(name = "inventoryTL")
     @Bulkhead(name = "inventoryBH")
     public InventoryServiceResponse getInventoryStockFromProductId(Long id) {
@@ -53,6 +53,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public InventoryServiceResponse inventoryFallbacks(String productId, Throwable t) {
-        return  new InventoryServiceResponse(0L);
+        log.error("Inventory service failure detected: {}, payload = {}",
+                t.getMessage(), productId);
+        throw new ProductException("inventory is not responding");
     }
 }
