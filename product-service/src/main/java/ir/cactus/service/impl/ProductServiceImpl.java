@@ -14,7 +14,6 @@ import ir.cactus.repository.ProductRepository;
 import ir.cactus.service.api.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +23,6 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper mapper;
-    @Qualifier("ir.cactus.inventory.contract.InventoryClient")
     private final InventoryClient inventoryClient;
 
     @Override
